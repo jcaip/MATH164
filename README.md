@@ -1,2 +1,6 @@
 # MATH164
-optimization
+
+Solutions to hw exercises from **Chong/Zak - An Introduction to Optimization**.
+
+
+
