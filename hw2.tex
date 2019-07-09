@@ -16,6 +16,7 @@
 \usepackage{mathtools}
 \DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
 \DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\l2}{\lVert}{\rVert}
 \newcommand\m[1]{\begin{bmatrix}#1\end{bmatrix}} 
 \begin{document}
 
@@ -72,9 +73,16 @@ MATH 164 Homework 2
 
     \item \textbf{10.2 Show that if $g_k^Td_k \neq 0$ then $\{ d_0 \ldots d_{n-1} \}$ are Q-conjugate.}
     
-    We can take the derivitave of $\phi$ with respect to $\alpha$.
+    $$f(x_k + \alpha d_k) = \frac{1}{2} (x_k + \alpha d_k)^T Q (x_k + \alpha d_k) - (x_k + \alpha d_k)^Tb= \frac{1}{2} d_k^TQd_k \alpha^2 + g_k^Td_k \alpha + C$$
+    
+    We can take the derivitave of $\phi$ with respect to $\alpha$, which is 0 due to Lemma 10.2.
 
-    TODO
+    $\phi'(\alpha_k) = \nabla f(x_k + \alpha_k d_k)^Td_k = g_{k+1}^td_k = 0$
+
+    But then since $g_k^Td_i = 0$:
+
+    $$d_k^TQd_i = \frac{1}{\alpha_k}(x_{k+1} - x_k)^TQd_i = \frac{1}{\alpha_k}(g_{k+1} - g_k)^TQd_i = 0$$
+
      
     \item \textbf{10.3 Show that in the conjugate gradient method for a standard quadratic $d_k^TQd_k = - d_k^TQg_k$}
     
@@ -185,11 +193,21 @@ MATH 164 Homework 2
         $$x^* = Q^{-1}b = \begin{bmatrix} 1 & -2 \\ -2 & 5\end{bmatrix} \begin{bmatrix} 3 \\ 1\end{bmatrix} = \begin{bmatrix} 1 \\ -1 \end{bmatrix}$$
     \end{enumerate}
 
-    \item \textbf{11.1 }
+    \item \textbf{11.1}
     \begin{enumerate}
-        \item $\phi(\alpha) = f(x_k + \alpha d_k), \phi'(\alpha) = d_k^T()$
-        \item TODO
-        \item $g_{k+1} = f'(x_k + \alpha d_k) = \phi'(0) $
+        \item $\phi(\alpha) = f(x_k + \alpha d_k) \implies  \phi'(\alpha) = d_k^Tg_k$. But $\phi'$ is continuous so if $d_k^Tg_k < 0 \implies \exists \alpha : \forall \alpha \in (0, \alpha) \phi(\alpha) > \phi(0)$ 
+        \item We know that $alpha_k = \argmin_{\alpha \geq 0} \phi(\alpha)$ so either $alpha_k > 0$ or $\alpha_k = 0$, but $\alpha_k = 0 $ leads to a contradiction with a) so $alpha_k > 0$.
+        \item $g_{k+1} = f'(x_k + \alpha d_k) = \phi'(alpha_k) = 0 $
+        \item \begin{enumerate}
+            \item $d_k = -g_k \implies d_k^Tg_k = -g_k^Tg_k = - \l2{g_k}^2 < 0$
+            \item $d_k = -F(x_k)^{-1} g_k$. But $Q$ is positive definite $\implies Q^{-1}$ is positive definite.
+            
+            So $d_k^Tg_k = -g_k^TF(x_k^{-1]})g_k < 0$
+            \item $d_k = -g_k + \beta_{k-1} d_{k-1}$
+            So using Lemma 10.2 we get $d_k^Tg_k = -g_k^Tg_k + \beta_{k-1}d_{k-1}^Tg_k = - g_k^Tg_k <0$
+            \item $d_k = -H_k g_k $ If $H_k > 0 \implies d_k^Tg_k =  - g_k^THg_k < 0 $
+        \end{enumerate}
+        \item $\alpha_k = -\frac{d_k^Tg_k}{d_k^TQd_k}$
     \end{enumerate}
     
     \item \textbf{11.3 Consider minimizing $\phi(\alpha) = f(x_k + \alpha d_k)$ where $f$ is a standard quadratic.}
@@ -240,7 +258,25 @@ MATH 164 Homework 2
     $$d_0 = -H_0g_0 = -g_0 = [1, -1]^T$$
     $$d_1 = -H_1g_1 =  - \m{1 & 0 \\0 & \frac{1}{2}} \m{-\frac{1}{3} \\ -\frac{1}{3}} = \m{\frac{1}{3} \\ \frac{1}{6}}$$
 
-    \item \textbf{11.10}
+    \item \textbf{11.10 Apply the rank-1 algorithm to $f(x) = \frac{1}{2} x^T\m{4 & 2 \\ 2 & 2} x - x^T\m{-1 \\1} $}
+    
+    $g_0 = Qx_0 -b = -b = [-1, 1]^T$ and $d_0 = -H_0g_0 = -g_0 = [1, -1]^T$
+
+    $\alpha_0 = \frac{g_0^Td_0}{d_0^TQd_0} = \frac{2}{3}$
+
+    $x_1 = x_0 + \frac{2}{3}[1, -1]^T = [\frac{2}{3}, -\frac{2}{3}]^T$
+
+    $g_1 = Qx_1 -b = [\frac{4}{3}, 0]^T$
+
+    $\Delta x_0 - H_0 \Delta g_0 = \begin{bmatrix}  \frac{2}{3} \\ -\frac{2}{3}\end{bmatrix} - \begin{bmatrix} \frac{4}{3} -1 \\ 0 +1 \end{bmatrix} = \begin{bmatrix}\frac{1}{3} \\ \frac{-5}{3}\end{bmatrix}$
+
+    $\Delta g_0^T(\Delta x_0 - H_0 \Delta g_0) =  [\frac{1}{3}, 1]^T\m{\frac{1}{3} \\ -\frac{5}{3}} = -\frac{14}{9}$
+    
+    $$H_1 = H_0 + \frac{(\Delta x_0 - H_0 \Delta g_0)(\Delta x_0 - H_0 \Delta g_0)^T}{\Delta g_0^T(\Delta x_0 - H_0 \Delta g_0)} = \frac{1}{2} \m{1 & -1 \\ -1 & 1}$$
+
+    $d_1 = -H_1g_1 =  - \frac{1}{2}\m{1 & -1 \\-1 & 1} \m{-\frac{1}{3} \\ -\frac{1}{3}} = 0$
+
+    So this algorithm fails for this problem.
 
 \end{enumerate}
 \end{document}
