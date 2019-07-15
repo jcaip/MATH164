@@ -1,0 +1,171 @@
+\documentclass[10pt,a4paper]{article}
+\addtolength{\oddsidemargin}{-.875in}
+\addtolength{\evensidemargin}{-.875in}
+\addtolength{\textwidth}{1.75in}
+\addtolength{\topmargin}{-.875in}
+\addtolength{\textheight}{1.75in}
+
+\usepackage{amsmath,amssymb}
+\DeclareMathOperator*{\E}{\mathbb{E}}
+\DeclareMathOperator*{\R}{\mathbb{R}}
+\DeclareMathOperator*{\Q}{\mathbb{Q}}
+\DeclareMathOperator*{\N}{\mathbb{N}}
+\DeclareMathOperator*{\I}{\mathbb{I}}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\l2}{\lVert}{\rVert}
+\newcommand\m[1]{\begin{bmatrix}#1\end{bmatrix}} 
+\begin{document}
+
+Jesse Cai
+
+MATH 164 Homework 3
+
+304634445
+
+\begin{enumerate}
+    \item[15.1] 
+
+     Minimize $f(x_1, x_2) = -2x_1 -x_2$ such that 
+
+    $x_1 -s_1 = 2 $
+
+    $x_1 + x_2 +s_2 = 3$
+
+    $x_1 + 2x_2 + s_3 = 5$
+
+    $x_1, x_2, s_1, s_2, s_3 \geq 0$
+
+    \item [15.3] We can rewrite the original problem as follows
+    
+    Minimize $\sum_{i=1}^n c_i(x_i^+ - x_i^-)$ such that
+    $$A(x^+ - x^-) = b, x^+, x^- \geq 0$$
+    However for it to be true standard form we'll need to rewrite $A$ and $c$ as $A' = [A, -A], c'= [c, c]$.
+
+    \item [15.5]
+        Let number of units shipped be $x_1, x_2, x_3, x_4$ respectively for AC, AD. BC, BD.
+
+        Minimize $f(x) = x_1 + 2x_2 + 3x_3 + 4x_4 $ s.t.
+
+        $x_1 + x_2 + s_1 = 70$
+        $x_3 + x_4 + s_2 = 80$
+        $x_1 + x_3 = 50$
+        $x_2 + x_4 = 60$
+    
+    \item [15.7] Let $x_i$ be the weight of item $i$ used.
+
+    Then our goal is to minimize the total cost $f(x) = 2x_1 + 4x_2 + x_3 + 2x_4$ such that. 
+
+    $x_1 + x_2 + x_3 + x_4 = 1000$
+
+    $3x_1 + 8x_2 + 16x_3 + 4x_4 = 10000$
+
+    $6x_1 + 46x_2 + 9x_3 + 9x_4 = 2000$
+
+    $20x_1 + 5x_2 + 4x_3  = 5000$
+
+    However the only solution is $\m{179 \\ -175 \\ 573 \\ 422}$ which is infeasible, so there is no solution.
+    
+    \item [15.9] The matrix has full rank $3$, so there are ${5 \choose 3}  = 10$ basic solutions.
+    
+        They are as follows:
+
+        $ x^*_{1, 2, 3} = \frac{1}{17}\m{-4 & -80 & 83 & 0 & 0 }$
+
+        $ x^*_{1, 2, 4} = \m{-10 & 49 & 0 & -83 & 0 }$
+
+        $ x^*_{1, 2, 5} = \frac{1}{31}\m{105 & 25 & 0 & 0 & 83 }$
+
+        $ x^*_{1, 3, 4} = \frac{1}{11}\m{-12 & 0 & 49 & -80 & 0 }$
+
+        $ x^*_{1, 3, 5} = \frac{1}{35}\m{100 & 0 & 25 & 0 & 80 }$
+
+        $ x^*_{1, 4, 5} = \frac{1}{18}\m{65 & 0 & 0 & 25 & 49 }$
+
+        $ x^*_{2, 3, 4} = \m{0 & -6 & 5 & 2 & 0 }$
+
+        $ x^*_{2, 3, 5} = \frac{1}{23}\m{0 & -100 & 105 & 0 & 4 }$
+
+        $ x^*_{2, 4, 5} = \m{0 & 13 & 0 & -21 & 2 }$
+
+        $ x^*_{3, 4, 5} = \frac{1}{19}\m{0 & 0 & 65 & -100 & 12 }$
+
+
+    \item [15.10] TODO
+    
+    \item [16.2] \begin{enumerate}
+        \item $$A= \m{3 & 1 & 0 &1  \\ 6 &2 &1&1}, b = \m{4 \\5}, c = \m{2 \\-1 \\-1 \\0 }$$
+        \item The tableau is given by 
+        $$ \m{ 3 & 1 & 0 & 1 & 4\\ 6 & 2 &1 & 1 & 5 \\ 2 & -1 & -1 &0 &0}$$
+
+        we need to pivot about $(2, 3)$ and $(1, 4)$ and to get 
+
+        $$ \m{ 3 & 1 & 0 & 1 & 4\\ 3 & 1 &1 & 0 & 1 \\ 5 & 0 & 0 &0 &1}$$
+
+        \item  The basic feasible solution corresponding to this is $\m{0 \\ 0 \\ 1 \\ 4}$ with cost $-1$.
+        \item The coefficients are $\m{5 & 0 & 0 & 0 }$.
+        \item Yes it is optimal, as all the reduced row coefficients are positive.
+        \item Yes, there is a basic feasible solution. 
+        \item TODO
+
+
+    \end{enumerate}
+
+    \item [16.3] 
+        The tableau for this problem is given by $$\m{1 & 0 & 1 & 1 \\ 0 & 1 &1 & 2 \\ -1 & -1 & -3 & 0}$$
+        By $R_3 + R_2 + R_1 \rightarrow R_3$ we can get the cannonical form.
+
+        $$\m{1 & 0 & 1 & 1 \\ 0 & 1 &1 & 2 \\ 0 & 0 & -1 & 3}$$
+
+        And then we pivot about $-1$ by $R_1 + R_3 \rightarrow R_3; R_2 - R_1 \rightarrow R_1$. 
+
+        $$\m{1 & 0 & 1 & 1 \\ -1 & 1 & 0 & 1 \\ 0 & 1 & 0 & 5}$$
+
+        Then the solution given is $\m{ 0 \\ 1 \\ 1}$ for a total cost of $5$.
+
+    \item [16.4]
+        We know there will be $3$ slack variables because we have three inequalities.
+        The tableau for this problem is given by 
+        $$\m{1 & 0 & 1 & 0 & 0 & 5 \\ 0 & 1 & 0 & 1 & 0 & 7 \\ 1 & 1 & 0 & 0 & 1 & 9\\ -2 & -1 & 0 &0 &0& 0  }$$
+
+        There's a negative reduced cost coefficient, so we pivot along $(1, 1)$ via $R_3 -R_1 \rightarrow R_3$ and $R_4 + 2R_1 \rightarrow R_4$
+
+        $$\m{1 & 0 & 1 & 0 & 0 & 5 \\ 0 & 1 & 0 & 1 & 0 & 7 \\ 0 & 1 & -1 & 0 & 1 & 4\\ 0 & -1 & 2 &0 &0& 10  }$$
+
+        Again we pivot along $(3, 2)$ via $R_2 + R_4 \rightarrow R_2$ and $R_4 + R_3 \rightarrow R_4$
+
+        $$\m{1 & 0 & 1 & 0 & 0 & 5 \\ 0 & 0 & 2 & 1 & 0 & 17 \\ 0 & 1 & -1 & 0 & 1 & 4\\ 0 & 0 & 1 &0 &1& 14  }$$
+
+        Now our reduced row coefficients are all positive so our solution is $x = \m{5 \\ 4}$ for a total cost of 14.
+
+    \item [16.5] \begin{enumerate}
+        \item TODO
+    \end{enumerate}
+    \item [16.6] TODO
+    \item [16.8] \begin{enumerate}
+        \item $\m{6 \\ 0 \\7 \\ 5\\0 }$ is the basic feasible solution for this tableau, with $f(x) = 8$
+        \item $\m{ 0 & 4 & 0 &0 &-4}$
+        \item Yes, as we can get any negative value since the last column is all negative.
+        \item We would neeed to pivot about $(3,2)$ to get
+        $$\m{0 & 0 & -\frac{1}{3} & 1 & 0 & \frac{8}{3} \\ 
+             1 & 0 & -\frac{2}{3} & 0 & 0 & \frac{4}{3} \\
+             0 & 1 & \frac{1}{3} & 0 & -1 & \frac{7}{3} \\
+             0 & 0 & -\frac{4}{3} & 0 & 0 & -\frac{4}{3}
+        }$$
+        \item TODO 
+        \item Note from the tableau $a_2 = a_4 + 2a_1 + 3a_3$ and $ a_5 = -a_4 -2a_1  - 3a_3$ so therefore 
+        $\m{2 \\ -1 \\ 3\\1\\0}, \m{-2 \\ 0 \\-3 \\-1\\-1} \in kernel(A)$. By RN theorem we know that $nullity(A) = 2$
+        Since these two vectors are linearly independent, they forma  basis for the kernel of $A$.
+    \end{enumerate}
+
+    \item [16.9]
+    \item [16.10]
+    \item [16.11]
+    \item [16.12]
+    \item [16.14]
+\end{enumerate}
+
+\end{document}
