@@ -59,13 +59,13 @@ MATH 164 Homework 3
 
     Then our goal is to minimize the total cost $f(x) = 2x_1 + 4x_2 + x_3 + 2x_4$ such that. 
 
-    $x_1 + x_2 + x_3 + x_4 = 1000$
+        $x_1 + x_2 + x_3 + x_4 = 1000$
 
-    $3x_1 + 8x_2 + 16x_3 + 4x_4 = 10000$
+        $3x_1 + 8x_2 + 16x_3 + 4x_4 = 10000$
 
-    $6x_1 + 46x_2 + 9x_3 + 9x_4 = 2000$
+        $6x_1 + 46x_2 + 9x_3 + 9x_4 = 2000$
 
-    $20x_1 + 5x_2 + 4x_3  = 5000$
+        $20x_1 + 5x_2 + 4x_3  = 5000$
 
     However the only solution is $\m{179 \\ -175 \\ 573 \\ 422}$ which is infeasible, so there is no solution.
     
@@ -94,7 +94,8 @@ MATH 164 Homework 3
         $ x^*_{3, 4, 5} = \frac{1}{19}\m{0 & 0 & 65 & -100 & 12 }$
 
 
-    \item [15.10] TODO
+    \item [15.10]
+    \vspace{20mm}
     
     \item [16.2] \begin{enumerate}
         \item $$A= \m{3 & 1 & 0 &1  \\ 6 &2 &1&1}, b = \m{4 \\5}, c = \m{2 \\-1 \\-1 \\0 }$$
@@ -108,8 +109,8 @@ MATH 164 Homework 3
         \item  The basic feasible solution corresponding to this is $\m{0 \\ 0 \\ 1 \\ 4}$ with cost $-1$.
         \item The coefficients are $\m{5 & 0 & 0 & 0 }$.
         \item Yes it is optimal, as all the reduced row coefficients are positive.
-        \item Yes, there is a basic feasible solution. 
-        \item TODO
+        \item Yes, there is a basic feasible solution, since the phase I of the two-phase method returned a valid basic solution.
+        \item $$\m{0 & 0 & -1 & 1 & 2 & -1 & 3 \\ 1 & \frac{1}{3} & \frac{1}{3} & 0 & -\frac{1}{3} & \frac{1}{3} & \frac{1}{3} \\ 2 & -1 & -1 & 0 & 0 &0 &0  }$$
 
 
     \end{enumerate}
@@ -142,9 +143,30 @@ MATH 164 Homework 3
         Now our reduced row coefficients are all positive so our solution is $x = \m{5 \\ 4}$ for a total cost of 14.
 
     \item [16.5] \begin{enumerate}
-        \item TODO
+        \item We can get the basis from the cannonical tableau 
+        $$\m{ 0 & 1 & 1 & 2 \\ 1 & 0 & 3 & 4 }$$
+
+        Then we can try to get the identity matrix on the right via $R_2 - 2R_1 \rightarrow R_2$ and $R_1 - R_2 \rightarrow R_2$ and $R_2 / 2 \rightarrow R_2$
+
+        $$\m{-\frac{1}{2} & \frac{3}{2} & 0 & 1 \\ 1 & -2 & 1 & 0}$$
+        
+        so $B  = \frac{1}{2}\m{-1 & 3 \\ 2 & -4}$
+
+        \item We know that $c_D^T = r_D^T + c_B^TB^{-1}D$ 
+        $$ = [-1, 1] + [8, 7]^T \m{1 & 2 \\ 3 & 4} = [30, 47]$$ 
+        so the missing part of $c = [30, 47]^T$.
+        \item The basic feasible solution is given by $B^{-1}b = \m{1 & 2 \\ 3 & 4} \m{5 \\ 6} = \m{16 \\ 38}$.
+        \item The first two elements are given above and the last element is given by $-c_B^TB^{-1}b = - \m{7 & 8}\m{16 \\ 38} = -426$
+        The missing values are $[16, 38, −416]^T$.
+        
     \end{enumerate}
-    \item [16.6] TODO
+
+
+    \item [16.6] The columns in the constraint matrix A corresponding to $x^+, x^-$
+    are linearly dependent. Hence they
+    cannot both enter a basis at the same time. This means that only one variable, can assume a
+    nonnegative value; the nonbasic variable is necessarily zero.
+    
     \item [16.8] \begin{enumerate}
         \item $\m{6 \\ 0 \\7 \\ 5\\0 }$ is the basic feasible solution for this tableau, with $f(x) = 8$
         \item $\m{ 0 & 4 & 0 &0 &-4}$
@@ -155,17 +177,127 @@ MATH 164 Homework 3
              0 & 1 & \frac{1}{3} & 0 & -1 & \frac{7}{3} \\
              0 & 0 & -\frac{4}{3} & 0 & 0 & -\frac{4}{3}
         }$$
-        \item TODO 
+        \item $x = [52, 0, 76, 28, 23]^T$
         \item Note from the tableau $a_2 = a_4 + 2a_1 + 3a_3$ and $ a_5 = -a_4 -2a_1  - 3a_3$ so therefore 
         $\m{2 \\ -1 \\ 3\\1\\0}, \m{-2 \\ 0 \\-3 \\-1\\-1} \in kernel(A)$. By RN theorem we know that $nullity(A) = 2$
-        Since these two vectors are linearly independent, they forma  basis for the kernel of $A$.
+        Since these two vectors are linearly independent, they form a  basis for the kernel of $A$.
     \end{enumerate}
 
     \item [16.9]
+    \begin{enumerate}
+        \item We can rewrite this as minimize $f(x) = x_1 + 2x_2$ s.t. $x_2 - s_1 = 1$
+        \item First we create our tableau $$\m{ 0 & 1 & -1 & 1 \\ 1 & 2 & 0 & 0 }$$
+        
+        Then for phase 1 we try to minimize $f(x) = y_1$ 
+        $$\m{ 0 & 1 & -1 & 1 & 1 \\ 0 & 0 & 0 & 1 & 0 }$$
+
+        We zero out the bottom row via $ R_2 - R_1 \rightarrow R_2$
+        $$\m{ 0 & 1 & -1 & 1 & 1 \\ 0 & -1 & 1 & 0 & -1 }$$
+
+        Then we pivot about $(1, 2)$ via $R_2 + R_1 \rightarrow R_2$ and get back our original matrix
+        $$\m{ 0 & 1 & -1 & 1 & 1 \\ 0 & 0 & 0 & 1 & 0 }$$
+
+        The we start phase 2 by pivoting about $(1, 2)$ to get
+        $$\m{ 0 & 1 & -1 &  1 \\ 1 & 0 & 2 & -2  }$$
+        so our solution is $ x = \m{0 & 1}^T$.
+
+    \end{enumerate}
+        
     \item [16.10]
+    \begin{enumerate}
+        \item A basic solution is found when $x_2 = 0$ which forces $x_1= 1$ for $[1, 0 ]^T$.
+        \item $\m{1 & -1 & 1}$
+        \item The algorithm terminates since the problem is unbounded, as the element at $(1, 2) < 0$ 
+        \item Note that any $x_1 \in \mathbb{R}$  the vector of the form $[x_1, x_1 -1]$ is feasible, so the objective function can take any arbritary value in $\mathbb{R}$.
+    \end{enumerate}
+
     \item [16.11]
+    First we construct the cannonical tableau $$\m{1 & 2 & -1 & 0 & 3 \\ 2 & 1 & 0 & -1  & 3 \\ 1 & 1 & 0 & 0 &0 }$$
+
+    With $x_1, x_2$ as basic variables we get $ B = \m{1 & 2 \\ 2 & 1} \implies B^{-1} = \frac{1}{3}\m{-1 & 2 \\ -1 & 2}$
+
+    so then $\lambda_d = \frac{1}{3}\m{1 & 1} \m{-1 & 2 \\ 2 & -1} = \m{\frac{1}{3} \\ \frac{1}{3}}$ and $r_d = c^T_d - \lambda^T D = 0 - \m{\frac{1}{3} \\ \frac{1}{3}} \m{-1 & 0 \\ 0 & -1 } = \m{\frac{1}{3} & \frac{1}{3}}$
+
+    Since these are all non-negative, this is an optimal solution $\m{1 & 1}^T$ with cost 2.
+
     \item [16.12]
+    \begin{enumerate}    
+        \item The cannonical tableau has the form
+        $$\m{5 & 1 & -1 & 0 & 0 & 11 \\
+             -2 & -1 & 0 & 1 & 0 & -8 \\
+             1 & 2 & 0 & 0 & -1 & 7 \\
+             4 & 3 & 0 & 0 &0 & 0
+        }$$
+
+        There is no basic feasible solution, so we can add in $y_1, y_2, y_3$ to get an updated tableau
+
+        $$\m{5 & 1 & -1 & 0 & 0 & 1 & 0 & 0 & 11 \\
+             2 & 1 & 0 & -1 & 0 & 0 & 1 & 0& 8 \\
+             1 & 2 & 0 & 0 & -1 & 0 & 0 &1 &7 \\
+             0 & 0 & 0 & 0  &0 & 1 & 1 & 1 & 0
+        }$$
+
+        Our $B^{-1} = I_3, y_0 = \m{11 \\ 8 \\7}$ 
+
+        with $y_1, y_2, y_3$ as our basic variables we get $\lambda = [1, 1, 1]^T$ and $r_D = [-8, -4, 1, 1, 1]^T$.
+        So we pivot about $(1, 1)$ to bring $x_1$ into the basis.
+
+        After this our $B^{-1} = \m{\frac{1}{5} & 0 & 0 \\ -\frac{2}{5} & 1 & 0 \\ -\frac{1}{5} & 0 & 1}, y_0 = \m{\frac{11}{5}, \frac{18}{5}, \frac{24}{5}}$
+
+        with $x_1, y_2, y_3$ as our basis we get $\lambda = [-\frac{3}{5}, 1, 1]^T$ and $r_D = [-\frac{12}{5}, -\frac{3}{5}, 1, 1, \frac{8}{5}]^T$.
+
+        So we pivot about $(2, 3)$ to bring $x_2$ into the basis.
+
+        After this our $B^{-1} = \m{\frac{2}{9} & 0 & -\frac{1}{9} \\ -\frac{1}{3} & 1 & -\frac{1}{3} \\ -\frac{1}{9} & 0 & \frac{5}{9}}, y_0 = \m{\frac{5}{3}, 2, \frac{8}{3}}$
+
+        with $x_1, x_2, y_3$ as our basis we get $\lambda = [-\frac{1}{3}, 1, -\frac{1}{3}]^T$ and $r_D = [-\frac{1}{3}, 1, -\frac{1}{3}, \frac{4}{3}, \frac{4}{3}]^T$.
+
+        So we pivot about $(3, 2)$ to bring $x_3$ into the basis.
+
+        After this our $B^{-1} = \m{0 & \frac{2}{3}  & -\frac{1}{3} \\ -1 & 3 & -1 \\  0 & -\frac{1}{3} & \frac{2}{3}}, y_0 = \m{3 \\ 6 \\2}$
+
+        with $x_1, x_2, x_3$ as our basis we get $\lambda = 0$ and $r_D = [0, 0, 1, 1, 1]^T$.
+
+        So our initial solution = $[3, 2, 6, 0, 0]^T$
+
+        Going back to our original tableau with $x_1, x_2, x_3$ as our basis we get $\lambda = [0, \frac{5}{3}, \frac{2}{3}]$ which are the same ad $r_d > 0$
+
+        so the optimal solution is $[3, 2]^T$.
+
+        \item The cannonical tableau for this problem is 
+         $$\m{1 & 2 & 1 & 2 & 1 & 0 & 0 & 20 \\
+              6 & 5 & 3 & 2 & 0 & 1  & 0& 100 \\
+              3 & 4 & 9 & 12 & 0 & 0&1 & 75 \\
+              -6 & -4 & -7 & -5 & 0 & 0&0  &0 \\
+               
+         }$$
+
+        Our $B^{-1} = I_3, y_0 = \m{20 \\ 100 \\75}$ 
+
+        with $y_1, y_2, y_3$ as our basic variables we get $\lambda = 0$ and $r_D = [-6, -4, -7, -5]^T$.
+        So we pivot about $(3, 2)$ to bring $x_2$ into the basis.
+
+        After this our $B^{-1} = \m{1 & 0 & -\frac{1}{9} \\ 0 & 1 & -\frac{1}{3} \\ 0 & 0 & \frac{1}{9}}, y_0 = \m{\frac{35}{3}, 75, \frac{25}{3}}$
+
+        with $x_1, x_2, y_3$ as our basis we get $\lambda = [0, 0, -\frac{7}{9}]^T$ and $r_D = [-\frac{11}{3}, -\frac{8}{9}, \frac{13}{3}, \frac{7}{9}]^T$.
+
+        So we pivot about $(2, 1)$ to bring $x_1$ into the basis.
+
+        After this our $B^{-1} = \m{0 & \frac{2}{3}  & -\frac{1}{3} \\ -1 & 3 & -1 \\  0 & -\frac{1}{3} & \frac{2}{3}}, y_0 = \m{3 \\ 6 \\2}$
+
+        with $x_1, x_2, x_3$ as our basis we get $r_D = [\frac{27}{15}, \frac{43}{15}, \frac{11}{15}, \frac{8}{15}]^T$.
+
+        so the optimal solution is $[15, 0, \frac{10}{3}, 0]^T$.
+
+    \end{enumerate}
+
     \item [16.14]
+    \begin{enumerate}
+        \item $\m{1 \\ 0}, \m{0 \\ 2}$
+        \item any vector in the $span(\m{2 \\ 1})$ will be a valid $c_1, c_2$.
+        \item These are all 0 since the basic feasible solutions are optimal. 
+    \end{enumerate}
+
 \end{enumerate}
 
 \end{document}
