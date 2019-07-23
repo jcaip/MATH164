@@ -18,6 +18,7 @@
 \DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
 \DeclarePairedDelimiter{\l2}{\lVert}{\rVert}
 \newcommand\m[1]{\begin{bmatrix}#1\end{bmatrix}} 
+
 \begin{document}
 
 Jesse Cai
@@ -27,7 +28,283 @@ MATH 164 Homework 4
 304634445
 
 \begin{enumerate}
-    \item
-\end{enumerate}
+    \item [17.1] Let $x$ be a feasible solution of the primal solution - then it must satisfy $Ax = b, x >0$. Similary if $\lambda$ is a feasible solution of the dual, it must satisfy $\lambda^T A \leq c^T$.
+    
+    Then since $x >0$ and $\lambda^TA \leq c^T \implies \lambda^Tb = \lambda^T Ax \leq c^Tx $, which is the weak duality lemma.
 
+    \item [17.3] \begin{enumerate}
+        \item The tableau for this problem is given by 
+        $$\m{1 & 2 & 1 & 0 & 4 \\
+             2 & 1 & 0 & 1 & 5 \\
+             -2 & -3 & 0 & 0& 0  }$$
+
+        Then we pivot about (1, 2) to get 
+        $$\m{\frac{1}{2} & 1 & \frac{1}{2} & 0 & 2 \\
+             \frac{3}{2} & 0 & -\frac{1}{2} & 1 & 3 \\
+             -\frac{1}{2} & 0 & \frac{3}{2} & 0 & 6   }$$
+
+        
+        Then we pivot about (2, 1) to get 
+        $$\m{0 & 1 & \frac{2}{3} & -\frac{1}{3} & 1 \\
+             1 & 0 & -\frac{1}{3} & \frac{2}{3} & 2 \\
+             0 & 0 & \frac{4}{3} &  \frac{1}{3} & 7   }$$
+
+        Here the reduced cost coefficients are all positive, so this is an optimal solution $x_* = [2, 1]^T$ 
+        
+        \item  The dual of this problem is maxamize $f(\lambda) = 4\lambda_1 + 5\lambda_2$ subject to
+
+        $\lambda_1 + 2\lambda_2 \leq -2 $
+
+        $\lambda_2 + 2\lambda_1 \leq -3 $
+        
+        We know that $\lambda_* = c_i - r_i = [-\frac{4}{3}, -\frac{1}{3}]$
+
+    \end{enumerate}
+    
+    \item[17.4]  The dual of this problem is maxamize $f(\lambda) = 11\lambda_1 + 8\lambda_2 + 3\lambda_3$ subject to
+
+    $5\lambda_1 + 2\lambda_2+ 1\lambda_3 \leq 4 $
+    
+    $\lambda_1 + \lambda_2+ 2\lambda_3 \leq 3 $
+
+    $\lambda_1, \lambda_2, \lambda_3 > 0$
+
+    \item [17.5] \begin{enumerate}
+        \item The dual of this problem is maxamize $f(\lambda) = 2\lambda_1 + 7\lambda_2 + 3\lambda_3$ subject to
+
+        $-2\lambda_1 - 1\lambda_2 + \lambda_3 \leq -1 $
+
+        $\lambda_1 + 2\lambda_2 leq -2 $
+
+        $\lambda_1, \lambda_2, \lambda_3 > 0$
+
+        \item We can solve the dual by using $\lambda_*^T = c_b^T B^{-1}$
+        
+        Here $c_b^T = [-1, -2, 0]$ and $B^{-1} = \m{0 & 0 & 1 \\ 0 & \frac{1}{2} & \frac{1}{2} \\ 1 & \frac{-1}{2} & \frac{3}{2}}$
+        So $ lambda_* = [0, -1, -2]^T$ 
+    \end{enumerate}
+
+    \item [17.6] \begin{enumerate}
+        \item The dual of this problem is to minimize $\lambda^Tb$ subject to 
+        $- \lambda^T A \leq c^T$
+        \item Yes it does. Note that any feasible point in the dual is optimal if $b = 0$. Then $y$ must be optimal. But then by the duality theorem, the primal also has an optimal solution with the same cost, 0. 
+        Note that $x = 0$ is feasible and satisfies the equal cost, so it is the optimal solution to the primal.
+
+    \end{enumerate}
+    
+    \item [17.8] \begin{enumerate}
+        \item  The dual of this problem is to max $f(\lambda) = \lambda$ such that
+        $\lambda^T[a_1, \ldots, a_n] \leq 1, \lambda > 0$
+
+        \item The duality theorem states that if the primal has an optimal solution so must the dual, and the cost of each solution should be the same. 
+        Note that the optimal solution of the dual is clearly $\lambda = \frac{1}{a_n}$, since $a_n$ is the greatest, so the primal must have the same cost. 
+
+        The only feasible point that has the same cost is $[0, \ldots, \frac{1}{a_n}]$ so then this must be the optimal solution of the primal.
+
+        \item Let us start at some nonfeasible basic solution $[0 \ldots a_i \ldots 0]$
+        
+        Then the reduced cost coefficients for column $j$ would be $1 - \frac{a_j}{a_i}$
+
+        Note that the most negative cost coefficient would be when $j=n$, in which case the algorithm terminates in one step. 
+
+    \end{enumerate}
+
+    \item [17.9] \begin{enumerate}
+        \item The dual of this problem is to minimize $f(\lambda) = \lambda$ subject to $\forall i : \lambda \geq c_i$.
+        \item This means that the optimal solution $\lambda_* = c_4$.
+        \item By the duality theorem, we know there must be an optimal solution to the primal that shares the same cost $c_4$. 
+        
+        The only feasible solution that has this property is $[0, 0, 0, 1, 0, \ldots 0]$, which must be the optimal solution. 
+    \end{enumerate}
+    
+    \item [17.13] Note that $\mu > 0 $ and $A^T\lambda  + \mu = c \implies A^T\lambda  < c$ so we know this is a feasible solution to the dual. 
+    
+    We can rewrite this as $\lambda^T A + \mu^T = c^T$ but then multiplying by $x$ on both sides yields
+
+    $$\lambda^T Ax + \mu^Tx = c^Tx$$
+
+    But then since $Ax=b$ and $\mu^Tx = $ we get $\lambda^Tb = c^Tx$, but by the duality theorem this means that $x, \lambda$ are the optimal solutions to the primal/dual.
+
+    \item [17.15] The dual of this problem is max $f(\lambda) = 3*\lambda_1 + 3*\lambda_2$ subject to 
+
+    $\lambda_1 + 2\lambda_2 \leq 1$
+
+    $2\lambda_1 + \lambda_2 \leq 1$
+
+    $\lambda_1, \lambda_2 \geq 0$.
+
+   We know that $\lambda^T = c_b^T B^{-1} = [1, 1]\m{1 & 2 \\ 2 & 1}^{-1} = [\frac{1}{3}, \frac{1}{3}]$
+
+   We can see that the duality theorem, holds as $c^Tx = 2 = \lambda^Tb$.
+
+    \item [17.16] The dual to this problem is to maxamize $\lambda^T0$ subject to $\lambda^T0 \leq c^T$. 
+    
+    This dual only has a feasible solution if $c^T \geq 0$. But note that any feasible solution to the dual is optimal, and by the duality theorem we know that the $\exists \lambda^* \implies \exists x^*$. 
+    
+    So there is an optimal solution iff $c \geq0$. But in this case we can see that the vector $0$ satisfies $c^Tx = \lambda^Tb = 0$ so it is an optimal solution.
+
+    \item [17.17] Consider the primal linear programming problem max $f(x) = 0^Tx$ s.t. $Ax \geq b, x \geq 0$ and it's respective dual min $b^T\lambda$ s.t. $\lambda^TA \leq 0, \lambda \geq 0$
+    
+        $(\implies)$ Let $\lambda = 0$ then $\lambda$ is feasible since $0^TA = 0$ so the feasible set of the dual is nonempty.
+        Since for any feasible solution $\lambda^T A \leq 0 \implies b^T\lambda \leq 0$ any feasible solution is less than 0, so $\lambda_* = 0$.
+
+        By the duality theorem, the existences of an optimal solution of the dual means that there is also a optimal solution for the primal so $\exists x s.t. Ax =b, x\geq 0$. 
+
+        $(\impliedby)$ If $x$ satisfies these conditions, then it is a feasible solution of the primal, with cost $0$. But then if $A^T \lambda \leq 0$ then it is a feasible solution of the dual and then by weak dualtiy theorem $b^T\lambda < c^Tx = 0$.
+    
+
+    \item [17.18] \begin{enumerate}
+        \item The dual is max $f(x) = b^T\lambda$ such that $\lambda^T A \leq 0$
+        \item Let $\lambda = 0$ then $\lambda$ is feasible since $0^TA = 0$ so the feasible set of the dual is nonempty
+        \item Since for any feasible solution $\lambda^T A \leq 0 \implies b^T\lambda \leq 0$ any feasible solution is less than the solution in b), which makes that solution the optimal one.
+        \item By the duality theorem, the existences of an feasible solution of the dual means that there is also a feasible solution for the primal so $\exists x s.t. Ax =b, x\geq 0$. 
+        \item If $x$ satisfies these conditions, then it is a feasible solution of the primal, with cost $0$. But then if $A^T \lambda \leq 0$ then it is a feasible solution of the dual and then by weak dualtiy $b^T\lambda < c^Tx = 0$.
+    \end{enumerate}
+
+    \item [17.19] Consider the primal linear programming problem max $f(x) = 0^Tx$ s.t. $(-A)x \leq (-b), x \geq 0$ and it's respective dual min $b^T\lambda$ s.t. $\lambda^T(-A) \geq 0, \lambda \geq 0$
+    
+    ($\implies$) If $\exists x: Ax \geq b$ then it is a feasible solution to the primal, and as such by the Weak Duality Theorem we know that $c^Tx \geq \lambda^Tb$ so $0 \geq - b^Ty \implies b^T\lambda \geq 0$ for all feasible solutions of the the dual ($A^t\lambda = 0, \lambda \geq 0$).
+   
+    ($\impliedby$) Note $0$ is a feasible solution of the dual, and it is optimal, since from assumption we know $b^T\lambda \geq 0$. But again by duality theorem $\implies \exists x : -Ax \geq -b \implies \exists x : Ax \leq b$.
+
+    \item [17.20]
+    
+    ($\implies$) We can use 17.19 here, with $ A = A, b = [-1 \ldots -1]$. Then we know from above that $\exists Ax \leq [-1 \ldots -1] \iff \forall y : A^Ty = 0, y \geq 0 \implies [-1 \ldots -1]^Ty \leq 0$.
+    
+    But since $ y \geq 0 , \implies  y =0$ , as otherwise it'd be negative because of $b$. So there only $\exists x: Ax \leq [-1 \ldots -1] < 0$ if $y =0$.
+
+   ($\impliedby$) Again by 17.19 we can seee that if $\forall Ty = 0, y\geq 0 : y=0$ then $\exists Ax < [-1 \ldots -1 ] < 0 $.
+
+    \item [17.24] \begin{enumerate}
+        \item If $x_0, y_0$ are feasible points of primal/dual then $f_1(x_0) \geq f_2(y_0)$.
+        
+        Note that $y \geq 0 , Ax-b \leq 0 \implies y_0^T(Ax_0-b) \leq 0$, since both points are feasible.
+
+        $$f_1(x_0) \geq f_1(x_0) + y_0^T(Ax_0 - b) = \frac{1}{2}x_0^Tx_0 + y_0^TAx_0 - y^Tb$$
+
+        $$f_2(y_0) =  - \frac{1}{2} y_0^T(AA^T)y_0 - b^T y_0$$
+
+        $$f_1(x_0) - f_2(y_0) \geq \frac{1}{2}x_0^Tx_0 + y_0^TAx_0 - y^Tb + \frac{1}{2} y_0^T(AA^T)y_0 + b^T y_0$$
+
+        $$f_1(x_0) - f_2(y_0) \geq \frac{1}{2} (x_0^Tx_0 + 2y_0^TAx_0 y_0^T(AA^T)y_0) = \frac{1}{2}\l2{y_0^TA+x_0}^2 > 0 $$
+
+        so $f_1(x_0) -f_2(y_0) \geq 0$
+
+        \item Let $x_0, y_0$ be feasible points in the primal/dual respectively such that $f_1(x_0) = f_2(y_0)$. WLOG for any feasible point $s$ in the primal, by a) we know $f_1(s) \geq f_2(y_0) = f_1(x_0)$. so $x_0$ is the optimal solution.
+    \end{enumerate}
+
+    \item [20.2] \begin{enumerate}
+        \item We can express this as the following matrix 
+        $$\m{
+            2 & 2& 0 & 1 & 4 \\
+            2 & 6 & 0 & 2 & 0 \\
+            0 & 0 & 0 & 0 & 5 \\
+            1 & 2 & 0 & 0 & 0 \\
+            4 & 0 & 5 & 0 & 0
+        } \m{x_1 \\ x_2 \\ x_3 \\ \lambda_1 \\ \lambda_2} = \m{-4 \\ -5 \\ -6 \\ 3 \\ 6}$$
+
+        Using the formulas given in Section 20.6 we get 
+
+        $$[x_* \mid \lambda_*] = [\frac{16}{5}, - \frac{1}{10}, -\frac{34}{23}, -\frac{27}{5}, -\frac{6}{5}], $$
+
+        Note $L = F = \m{ 2 & 2 & 0 \\ 2 & 6 & 0 \\ 0 & 0& 0}$ and the $T(x_*) = span([-10, 5, 8])$
+
+        Let $ y \in T(x_*)$ then:
+
+        $$y^TLy = \alpha^2[-10, 5, 6] \m{ 2 & 2 & 0 \\ 2 & 6 & 0 \\ 0 & 0& 0} \m{-10 \\ 5 \\6} = 1200\alpha^2 \geq 0$$
+
+        and the SOSC is satisfied so $x_*$ is a min.
+        
+        \item $\nabla f(x) = [ 4, 2x_2]$ and $\nabla h(x) = [2x_1, 2x_2]$ so by $0 = \nabla f(x) - \lambda \nabla h(x)$ we get
+    
+        $4 + 2 \lambda x_1= 0, 2x_2 + \lambda x_2 = 0, x_1^2 + x_2^2 = 9 $
+
+        We have four points that satisfy the condition, $\lambda = \pm \frac{2}{3}, x = [\mp3, 0]$ and $\lambda = -1, x = [2, \mp \sqrt5]$ 
+
+        $L = \m{0 & 0 \\ 0 & 2} + \lambda 2I $
+        
+        The first two are local minimizers while the last two are local maximizers. 
+
+        \item $\nabla f(x) = [ x_2, x_1]$ and $\nabla h(x) = [2x_1, 8x_2]$ so by $0 = \nabla f(x) - \lambda \nabla h(x)$ we get
+    
+        $x_2 + 2 \lambda x_1= 0, x_1 + 8\lambda x_2 = 0, x_1^2 + 4x_2^2 -1 = 0 $
+
+        We have four points that satisfy the condition, $\lambda = \frac{1}{4}, x = [\pm 1,\mp1] / \sqrt2$ and $\lambda = -\frac{1}{4}, x = \pm [1, 1] / \sqrt2$ 
+
+        $L = \m{0 & 1 \\ 1 & 0} + \lambda \m{2 & 0 \\ 0 & 8} $
+
+        The first two are local maximizers while the last two are local minimizers. 
+
+    \end{enumerate}
+
+    \item [20.5] \begin{enumerate}
+        \item $2(x - [1, \sqrt3]^T) + 2 \lambda_*x = 0, \l2{x}= 9$. so $\lambda_* = \pm \frac{2}{3}$. So either $x_* = \pm [1, \sqrt3]^T$.
+        \item We get $L = (1 + \lambda_*)I$. For $1+ \lambda_2 = -\frac{2}{3}$ , which means that this point is not a local minimizer, as the SONC is violated.
+        However, the first point satisfies the SOSC, as $1 + \lambda_1 = \frac{2}{3} > 0$. 
+    \end{enumerate}
+
+    \item [20.6] \begin{enumerate}
+        \item The problem is to min $f(x) = 2ab + 2bc + 2ca$ such that $abc = V$. So then we get $\nabla f(x) = 2[b+c, a+c, a+b]$ and $\nabla h(x) = [bc, ac, ba]$.
+        
+        From $\nabla f - \lambda \nabla h = 0$ we get 
+        $$2(b+c) - \lambda bc = 0$$
+        $$2(a+c) - \lambda ac = 0$$
+        $$2(b+a) - \lambda ab = 0$$
+        $$abc = V $$
+
+        \item Note that $nabla h = 0 $ means one of $a,b,c$ are 0, but this means the volume is 0 and it is no longer a feasible point. Hence all points are regular ($\nabla h(x) \neq 0$)
+        \item Solving the system of equations we get $a = b = c = \sqrt[3]V$ with $\lambda= -4\sqrt[3]V$. 
+        \item $$L = -2 \m{0 & 1 & 1 \\ 1& 0 & 1 \\ 1 &1 &0}$$ so $\forall y : y^tLy = -2(y_1(y_2 + y+3) + y_2*(y_1+y_3) +y_3*(y_2+y_1) ) = 2(y_1^2 + y_2^2 + y_3^2) > 0$ so the SOSC is satisfied.
+
+    \end{enumerate}
+
+    \item [20.8] \begin{enumerate}
+        \item We get $\nabla f(x) = [2, 3], \nabla h(x) = [x_2, x_1]$. Solving the Lagrange condition we get $[2, 3] - \lambda_* [x_2, x_1] = [0, 0]$.
+        So $x_2 = \frac{2}{\lambda }, x_1 = \frac{3}{\lambda} \implies \frac{6}{\lambda^2} = 6 \implies \lambda = \pm 1$. There are then two candidate points $[3,2], [-3, -2]$.
+
+        \item Note that $L = 0 + \lambda \m{0 & 1 \\ 1 & 0} = - \m{0 & 1 \\ 1 & 0}$.
+        
+        Let $v \in T(x_1) \implies v = \alpha[-3, 2]$. Then $v^TLv = \alpha^2 \m{-3 & 2} \m{0 & -1 \\ -1} \m{-3 \\ 2} = 12 \alpha^2 > 0$. So this satisifies the SOSC and is therefore a mininum.
+
+        But for $\lambda_* = 1, v^TLv = -12 \alpha^2 < 0$ so this is also a classifier.
+
+        \item $f(x_1) = 8, f(x_2) = -16$ so neither are global min/max.
+
+    \end{enumerate}
+
+    \item [20.12] Consider the minimization problem which has the same solution as the original problem min $-\l2{Ax}^2$ subject to $\l2{x}^2 = 1$.
+    
+    The the Langrange condition is $-2A^TAx + \lambda(2x) = 0 \implies A^TAx = \lambda x$. But then $\lambda$ is an eigenvalue of $A^TA$ and $\lambda_* = x^TA^TAx = \l2{Ax}^2 = -f(x)$. 
+
+    So the max eigenvalue, $lambda_1 = \l2{A}_2$.
+
+    \item [20.17] \begin{enumerate}
+        \item $\nabla f = (Ax-b)^TA, \nabla h(x) = C$
+        
+        $$ (Ax-b)^TA + \lambda^TC = 0$$
+
+        Solving for $x = (A^TA)^{-1}(A^Tb - C^T\lambda)$ we can then get. 
+
+        $Cx = d =  C(A^TA)^{-1}(A^Tb - C^T\lambda)$  
+
+        We can then solve for $\lambda = (C(A^TA)^{-1}C^T)^{-1}(C(A^TA)^{-1}A^Tb-d)$
+
+        Then taking $Q = A^TA^{-1}$ we can get 
+
+        $$ x= QA^Tb - QC^T(CQC^T)^{-1}(CQA^Tb-d)$$
+
+        \item If we take the objective function as $f(x) = \frac{1}{2} x^TA^TAx - b^TAx + C$ we can see it is equivalent to 
+        
+        min $\frac{1}{2} y^TQy, Q = A^TA$ subject to $Cy = d - CQ^{-1}A^Tb$
+        
+        The solution to this from Section 20.6 is $$y = Q^{-1}C^T(CQ^{-1}C^T)^{-1} A^Tb$$ which is the same thing we derived in a.
+    \end{enumerate}
+
+    \item [20.18] Let $y = x - Q^{-1} c$
+    Then we can use our usual solution to get 
+
+    $$y = x -Q^{-1} c =  Q^{-1}C^T(CQ^{-1}C^T)^{-1} A^Tb$$
+
+    With this, we can solve for x to get $$ x = Q^{-1}(c + A^T(AQ^{-1}A^T)^{-1}(b-AQ^{-1}c)$$.
+\end{enumerate}
 \end{document}
